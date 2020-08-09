@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EShop.Infrastructure.Data;
+using EShop.Infrastructure.Repositories;
+using EShop.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,10 @@ namespace EShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DBConfig>(Configuration);
+            services.AddSingleton<CatalogDbContext>();
+            services.AddTransient<ICatalogRepository, CatalogRepository>();
+            services.AddTransient<ICatalogService, CatalogService>();
             services.AddControllers();
         }
 
