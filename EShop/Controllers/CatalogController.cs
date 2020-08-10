@@ -31,7 +31,7 @@ namespace EShop.Controllers
         {
             await _catalogService.AddNewItem(item);
 
-            return Ok("Created");
+            return Ok(item);
         }
 
         [HttpGet, Route("GetCatalog")]
